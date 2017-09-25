@@ -21,5 +21,5 @@ for i in range(dim):
     if len(dimlist)==1:
         trainclear= train.drop(train_head_list[i],axis=1,inplace=True)
 
-print(trainclear.shape)
+print(trainclear.shape) # Now only has 336 features and 1 label
 print(trainclear)
