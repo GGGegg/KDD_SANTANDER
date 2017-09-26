@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 def preprocessing(train_X,train_y):
 
 
-	X_train, X_test, y_train, y_test = train_test_split(train_X,train_y)
+	X_train, X_test, y_train, y_test = train_test_split(train_X,train_y,random_state=42)
 	# if SMOTE:
 	# 	sm = SMOTE(random_state = 42)
 	# 	train_X, train_y = sm.fit_sample(train_X, train_y )

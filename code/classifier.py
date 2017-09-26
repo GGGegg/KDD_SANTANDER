@@ -11,9 +11,7 @@ def logistic_regression_classifier(train_X,train_y):
 
       
      
-    
-
-
+ 
 def MLP_classifier(train_X,train_y):
 	pass
 
