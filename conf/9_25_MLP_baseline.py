@@ -16,5 +16,5 @@ message="baseline"
 feature_engineering = fe.feature_engineering
 preprocessing = ppo.preprocessing
 #feature_selection = fs.feature_selection
-model = cf.logistic_regression_classifier
-# model = cf.MLP_classifier
+# model = cf.logistic_regression_classifier
+model = cf.MLP_classifier

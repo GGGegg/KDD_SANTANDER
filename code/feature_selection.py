@@ -8,6 +8,7 @@ import pandas as pd
 
 # First we do the data clean work
 # Step1: Remove constant variables : The dataset has many variables that are constant and has no significance with the customer satisfaction. These variables are identified and removed.
+
 dim=train.shape[1]; # There's total 371-1=370 dims(-1 is the target 1)
 sample=train.shape[0];
 head=train.columns
