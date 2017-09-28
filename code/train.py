@@ -41,6 +41,15 @@ def train(conf):
 	tfe_end = time.time()
 	logger.log("time: %.6f" % (time.time()-tbegin))
 
+	#feature selection
+	logger.log("feature_selection...")
+	train_X = configures.feature_selection(train_X)
+	train_X = configures.feature_selection_dr(train_X)
+	true_test = configures.feature_selection(true_test)
+
+	tfs_end = time.time()
+	logger.log("time: %.6f" % (time.time()-tfe_end))
+
 	#preprocessing
 	logger.log("prepropressing...")
 	X_train,X_test,y_train,y_test = configures.preprocessing(train_X,train_y)

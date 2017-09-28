@@ -1,6 +1,7 @@
 import pandas as pd
 from imblearn.over_sampling import SMOTE 
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import normalize
 
 
 # 1 Here we get the visualization of our data,
@@ -11,7 +12,7 @@ from sklearn.model_selection import train_test_split
 
 def preprocessing(train_X,train_y):
 
-
+	train_X = normalize(train_X,axis=0)
 	X_train, X_test, y_train, y_test = train_test_split(train_X,train_y,random_state=42)
 	# if SMOTE:
 	# 	sm = SMOTE(random_state = 42)
