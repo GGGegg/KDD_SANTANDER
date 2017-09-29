@@ -35,14 +35,10 @@ def MLP_classifier(train_X,train_y):
 									cv = 10,n_jobs=1,error_score = 0)
 	classifier.fit(train_X,train_y)
 	return classifier
- 
-	def logistic_regression_classifier(train_X,train_y):
+ def logistic_regression_classifier(train_X,train_y):	
 	from sklearn.linear_model import LogisticRegression
 	from sklearn.neighbors import KNeighborsClassifier
-	neigh = KNeighborsClassifier(n_neighbors=3)
-	neigh.fit(X, y) 
-
-	print(neigh.predict([[1.1]]))
-	print(neigh.predict([[.9]]))
-
+	neigh = KNeighborsClassifier(n_neighbors=7)
+	neigh.fit(train_X,train_y) 
+	return classifier
 
