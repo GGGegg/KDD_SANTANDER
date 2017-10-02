@@ -6,6 +6,7 @@ seed = 42
 # 3 Here we built multiple classifiers
 
 # We use this one for test other techniques, because it is fast.
+
 def logistic_regression_classifier(train_X,train_y):
 	from sklearn.linear_model import LogisticRegression
 	model = LogisticRegression(penalty='l2',n_jobs=20,solver="sag")
@@ -22,23 +23,31 @@ def MLP_classifier(train_X,train_y):
 	mlp_classifier = MLPClassifier(random_state = seed)
 	print(mlp_classifier.get_params().keys())
 	parameters = {
-				"hidden_layer_sizes":[370,185,92,46,23,11],
-				"activation":['identity','logistic','relu'],
+				# "hidden_layer_sizes":[370,185,92,46,23,11],
+				# "activation":['identity','logistic','relu'],
+				# "solver":["sgd"],
+				# "learning_rate":["adaptive"],
+				# "max_iter":[500],
+				# "random_state":[seed],
+				# "learning_rate_init":[0.001,0.01,0.02,0.03,0.1]
+				"hidden_layer_sizes":[185,92],
+				"activation":['relu'],
 				"solver":["sgd"],
 				"learning_rate":["adaptive"],
 				"max_iter":[500],
 				"random_state":[seed],
-				"learning_rate_init":[0.001,0.01,0.02,0.03,0.1]
+				"learning_rate_init":[0.001,0.01]
 	}
 
 	classifier = GridSearchCV(mlp_classifier,param_grid = parameters, pre_dispatch = 5,
 									cv = 10,n_jobs=1,error_score = 0)
 	classifier.fit(train_X,train_y)
 	return classifier
- def logistic_regression_classifier(train_X,train_y):	
-	from sklearn.linear_model import LogisticRegression
-	from sklearn.neighbors import KNeighborsClassifier
-	neigh = KNeighborsClassifier(n_neighbors=7)
-	neigh.fit(train_X,train_y) 
-	return classifier
+
+ # def logistic_regression_classifier(train_X,train_y):	
+	# from sklearn.linear_model import LogisticRegression
+	# from sklearn.neighbors import KNeighborsClassifier
+	# neigh = KNeighborsClassifier(n_neighbors=7)
+	# neigh.fit(train_X,train_y) 
+	# return classifier
 
