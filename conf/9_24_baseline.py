@@ -2,7 +2,7 @@
 # Each one create there own file, so we will not missed up.
 
 import sys
-sys.path.append("..code")
+sys.path.append("../code")
 import pandas as pd 
 import preprocessing as ppo 
 import feature_engineering as fe 
