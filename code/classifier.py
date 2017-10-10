@@ -44,10 +44,18 @@ def MLP_classifier(train_X,train_y):
 	classifier.fit(train_X,train_y)
 	return classifier
 
- # def logistic_regression_classifier(train_X,train_y):	
-	# from sklearn.linear_model import LogisticRegression
-	# from sklearn.neighbors import KNeighborsClassifier
-	# neigh = KNeighborsClassifier(n_neighbors=7)
-	# neigh.fit(train_X,train_y) 
-	# return classifier
+#def KNN_classifier(train_X,train_y):
+#    
+#    df = train
+#    df.drop(['ID'], 1, inplace=True)
+#    
+#    X = np.array(df.drop(['TARGET'],1))
+#    y = np.array(df['TARGET'])
+#    
+#    X_train, X_test, y_train, y_test = cross_validation.train_test_split(X,y,test_size=0.2)
+#    clf = neighbors.KNeighborsClassifier()
+#    clf.fit(X_train, y_train)
+#    accuracy=clf.score(X_test, Y_test)
+#    print(accuracy)
+#    return clf
 
