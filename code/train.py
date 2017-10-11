@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.svm import SVC
 from sklearn.preprocessing import MinMaxScaler
 import scipy as sp
-from imblearn.over_sampling import SMOTE 
+
 from scipy.sparse import csr_matrix
 import sys
 import importlib
@@ -15,8 +15,8 @@ import time
 
 # 3 Here we built multiple classifiers
 datasets = {
-	"train":"data/train.csv",
-	"test":"data/test.csv"
+	"train":"../data/train.csv",
+	"test":"../data/test.csv"
 }
 
 def aoc(act,pred):
@@ -31,7 +31,7 @@ def train(conf):
 
 	tbegin = time.time()
 	configures = importlib.import_module("conf."+conf)
-	logger = log.Log("output/"+conf+"_log.csv")
+	logger = log.Log("../output/"+conf+"_log.csv")
 
 	#feature engineering
 	logger.log(configures.message)
@@ -41,14 +41,14 @@ def train(conf):
 	tfe_end = time.time()
 	logger.log("time: %.6f" % (time.time()-tbegin))
 
-	# #feature selection
-	# logger.log("feature_selection...")
-	# train_X = configures.feature_selection(train_X)
-	# train_X = configures.feature_selection_dr(train_X)
-	# true_test = configures.feature_selection(true_test)
+	#feature selection
+	logger.log("feature_selection...")
+	train_X = configures.feature_selection(train_X)
+	train_X = configures.feature_selection_dr(train_X)
+	true_test = configures.feature_selection(true_test)
 
-	# tfs_end = time.time()
-	# logger.log("time: %.6f" % (time.time()-tfe_end))
+	tfs_end = time.time()
+	logger.log("time: %.6f" % (time.time()-tfe_end))
 
 	#preprocessing
 	logger.log("prepropressing...")
@@ -69,7 +69,7 @@ def train(conf):
 	loss = aoc(y_test, scores[:,1])
 	logger.log("aoc:%.6f" % loss)
 	scores = pd.DataFrame(scores)
-	scores.to_csv("output/"+conf+"_scores.csv",header=None,index=None)
+	scores.to_csv("../output/"+conf+"_scores.csv",header=None,index=None)
 	logger.log("All time: %.6f" % (time.time()-tbegin))
 	logger.log("------------------------------------------")
 	logger.close()
