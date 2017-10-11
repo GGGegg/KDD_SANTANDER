@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59a3c47e-b763-42bf-9c3b-ece9d1316d8d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/9_24_baseline.py" afterPath="$PROJECT_DIR$/conf/9_24_baseline.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/9_24_baseline_log.csv" afterPath="$PROJECT_DIR$/output/9_24_baseline_log.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/9_24_baseline_scores.csv" afterPath="$PROJECT_DIR$/output/9_24_baseline_scores.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="KDD_SANTANDER.iws" />
     <ignored path=".idea/workspace.xml" />
