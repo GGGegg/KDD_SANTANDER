@@ -44,7 +44,7 @@ def MLP_classifier(train_X,train_y):
 	classifier.fit(train_X,train_y)
 	return classifier
 
-def KNN_classifier(train_X,train_y):
+def KNN_classifier(train):
     
     df = train
     df.drop(['ID'], 1, inplace=True)
