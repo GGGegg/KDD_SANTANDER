@@ -4,8 +4,8 @@
 import sys
 sys.path.append("..code")
 import pandas as pd 
-import preprocessing as ppo 
-import feature_engineering as fe 
+import code.preprocessing as ppo
+import code.feature_engineering as fe
 # import feature_selection as fs 
 
 
