@@ -14,6 +14,7 @@ mode = "online"
 mode = "offline"
 message="baseline"
 component = 5
+SMOTE="False"
 feature_engineering = fe.feature_engineering
 preprocessing = ppo.preprocessing
 feature_selection = fs.remove_identical_features

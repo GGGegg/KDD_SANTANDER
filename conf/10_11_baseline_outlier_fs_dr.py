@@ -13,6 +13,7 @@ import code.classifier as cf
 mode = "online"
 mode = "offline"
 message="baseline"
+SMOTE="False"
 component = 336
 feature_engineering = fe.feature_engineering
 preprocessing = ppo.preprocessing

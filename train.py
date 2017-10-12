@@ -44,6 +44,7 @@ def train(conf):
 	#feature selection
 	logger.log("feature_selection...")
 	train_X = configures.feature_selection(train_X)
+	train_X = configures.feature_selection_imp(train_X,train_y)
 	# train_X = configures.feature_selection_dr(train_X,configures.component)
 	true_test = configures.feature_selection(true_test)
 
@@ -52,7 +53,7 @@ def train(conf):
 
 	#preprocessing
 	logger.log("prepropressing...")
-	X_train,X_test,y_train,y_test = configures.preprocessing(train_X,train_y)
+	X_train,X_test,y_train,y_test = configures.preprocessing(train_X,train_y,configures.SMOTE)
 
 	tprep_end = time.time()
 	logger.log("time: %.6f" % (time.time()-tfe_end))

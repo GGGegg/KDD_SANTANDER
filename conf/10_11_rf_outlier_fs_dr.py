@@ -18,5 +18,5 @@ component = 336
 feature_engineering = fe.feature_engineering
 preprocessing = ppo.preprocessing
 feature_selection = fs.remove_identical_features
-# feature_selection_dr = fs.feature_representation_PCA
-model = cf.logistic_regression_classifier
+feature_selection_dr = fs.feature_representation_PCA
+model = cf.random_forest
