@@ -11,8 +11,11 @@ from sklearn.ensemble import IsolationForest
 # data file to make sure we use the same data.
 
 
-def preprocessing(train_X,train_y):
+def preprocessing(train_X,train_y,SMOTE=False):
     train_X = normalize(train_X,axis=0)
+    if SMOTE == True:
+        sm = SMOTE(random_state=42)
+        train_X,train_y = sm.fit_sample(train_X,train_y)
     X_train,X_test,y_train,y_test = train_test_split(train_X,train_y,random_state=42)
     return X_train,X_test,y_train,y_test
 
