@@ -43,7 +43,7 @@ def remove_identical_features(data,target=None):
 def feature_representation_PCA(data,target=None,component = 40):
     print("PCA...")
     from sklearn.decomposition import PCA
-    # component = int(data.shape[1]/2)
+    component = int(data.shape[1]/2)
     pca = PCA(n_components = component)
     # outlier = data.outlier
     # data_rest = data.drop(['outlier'])
@@ -74,9 +74,11 @@ def select_base_importance(data,target):
     clf = ExtraTreesClassifier(random_state=42)
     clf.fit(data,target)
     importance = pd.Series(clf.feature_importances_,index=data.columns.values).sort_values(ascending=False)
-    print(importance)
-    importance = pd.DataFrame(importance)
-    importance.to_csv("output/feature_importance.csv",index=None)
+    # print(importance)
+    imp = pd.DataFrame()
+    imp["id"] = importance.index
+    imp["importance"]= importance.values
+    imp.to_csv("output/feature_importance.csv",index=None)
     model = SelectFromModel(clf,prefit=True)
     X_new = model.transform(data)
     print(X_new.shape)
