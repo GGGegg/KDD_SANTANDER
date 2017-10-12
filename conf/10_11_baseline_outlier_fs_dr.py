@@ -1,8 +1,8 @@
 # Here we give our parameters. eg. which classifier you will use.
 # Each one create there own file, so we will not missed up.
 
-#import sys
-#sys.path.append("code")
+import sys
+sys.path.append("..code")
 import pandas as pd 
 import code.preprocessing as ppo
 import code.feature_engineering as fe
@@ -19,4 +19,3 @@ preprocessing = ppo.preprocessing
 feature_selection = fs.remove_identical_features
 feature_selection_dr = fs.feature_representation_PCA
 model = cf.logistic_regression_classifier
-# model = cf.MLP_classifier

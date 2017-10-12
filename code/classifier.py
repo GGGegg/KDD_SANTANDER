@@ -13,7 +13,7 @@ def logistic_regression_classifier(train_X,train_y):
 	model.fit(train_X, train_y) 
 	return model
 
-      
+
      
  
 def MLP_classifier(train_X,train_y):

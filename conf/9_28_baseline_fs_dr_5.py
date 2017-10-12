@@ -13,7 +13,7 @@ import code.classifier as cf
 mode = "online"
 mode = "offline"
 message="baseline"
-component = 336
+component = 5
 feature_engineering = fe.feature_engineering
 preprocessing = ppo.preprocessing
 feature_selection = fs.remove_identical_features

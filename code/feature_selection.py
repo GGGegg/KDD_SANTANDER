@@ -11,7 +11,8 @@ from sklearn.feature_selection import VarianceThreshold
 
 
 # First we do the data clean work
-# Step1: Remove constant variables : The dataset has many variables that are constant and has no significance with the customer satisfaction. These variables are identified and removed.
+# Step1: Remove constant variables : The dataset has many variables that are constant and has
+# no significance with the customer satisfaction. These variables are identified and removed.
 
 # dim=train.shape[1]; # There's total 371-1=370 dims(-1 is the target 1)
 # sample=train.shape[0];
@@ -30,34 +31,37 @@ from sklearn.feature_selection import VarianceThreshold
 # print(trainclear)
 
 def remove_identical_features(data):
-	print("Remove identical features")
-	print("original data shape: ",data.shape)
-	for feature_1,feature_2 in itertools.combinations(
-				iterable = data.columns, r =2):
-		if np.array_equal(data[feature_1],data[feature_2]):
-			data.drop(feature_2,axis = 1)
-	print("distinct data shape:", data.shape)
-	return data
+    print("Remove identical features")
+    print("original data shape: ",data.shape)
+    for feature_1,feature_2 in itertools.combinations(
+                iterable = data.columns, r =2):
+        if np.array_equal(data[feature_1],data[feature_2]):
+            data.drop(feature_2,axis = 1)
+    print("distinct data shape:", data.shape)
+    return data
 
 def feature_representation_PCA(data,component = 336):
-	print("PCA...")
-	from sklearn.decomposition import PCA
-	pca = PCA(n_components = component)
-	transformed_data = pca.fit_transform(data)
-	# pca_attrs = pd.DataFrame()
-	# pca_attrs[0] = pca.explained_variance_
-	# pca_attrs[1] = pca.explained_variance_ratio_
-	# pca_attrs.columns = ["pca.explained_variance_","pca.explained_variance_ratio_"]
-	# pca_attrs.to_csv("../output/pca_attr.csv",index=None)
-	return transformed_data
+    print("PCA...")
+    from sklearn.decomposition import PCA
+    pca = PCA(n_components = component)
+    outlier = data.outlier
+    data_rest = data.drop(['outlier'])
+    transformed_data = pca.fit_transform(data_rest)
+    pca_attrs = pd.DataFrame()
+    pca_attrs[0] = pca.explained_variance_
+    pca_attrs[1] = pca.explained_variance_ratio_
+    pca_attrs.columns = ["pca.explained_variance_","pca.explained_variance_ratio_"]
+    pca_attrs.to_csv("output/pca_attr.csv",index=None)
+    transformed_data = pd.concat(transformed_data,data_rest)
+    return transformed_data
 
 def feature_representation_LLE(data,component = 168):
-	from sklearn.manifold import LocallyLinearEmbedding
-	lle = LocallyLinearEmbedding(n_neighbors = 5, n_components = component,
-								eigen_solver = 'dense', method = 'standard')
-	transformed_data = lle.fit_transform(data)
-	lle_error = pd.DataFrame()
-	lle_error[0] = lle.reconstruction_error
-	lle_error.columns = ["lle.reconstruction_error"]
-	lle_error.to_csv("../output/lle_error.csv",index = None)
-	return transformed_data
+    from sklearn.manifold import LocallyLinearEmbedding
+    lle = LocallyLinearEmbedding(n_neighbors = 5, n_components = component,
+                                eigen_solver = 'dense', method = 'standard')
+    transformed_data = lle.fit_transform(data)
+    lle_error = pd.DataFrame()
+    lle_error[0] = lle.reconstruction_error
+    lle_error.columns = ["lle.reconstruction_error"]
+    lle_error.to_csv("output/lle_error.csv",index = None)
+    return transformed_data
