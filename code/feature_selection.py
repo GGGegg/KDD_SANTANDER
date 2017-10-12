@@ -30,7 +30,7 @@ from sklearn.feature_selection import VarianceThreshold
 # print(trainclear.shape) # Now only has 336 features and 1 label
 # print(trainclear)
 
-def remove_identical_features(data):
+def remove_identical_features(data,target=None):
     print("Remove identical features")
     print("original data shape: ",data.shape)
     for feature_1,feature_2 in itertools.combinations(
@@ -40,22 +40,24 @@ def remove_identical_features(data):
     print("distinct data shape:", data.shape)
     return data
 
-def feature_representation_PCA(data,component = 336):
+def feature_representation_PCA(data,target=None,component = 40):
     print("PCA...")
     from sklearn.decomposition import PCA
+    # component = int(data.shape[1]/2)
     pca = PCA(n_components = component)
-    outlier = data.outlier
-    data_rest = data.drop(['outlier'])
-    transformed_data = pca.fit_transform(data_rest)
+    # outlier = data.outlier
+    # data_rest = data.drop(['outlier'])
+    transformed_data = pca.fit_transform(data)
     pca_attrs = pd.DataFrame()
     pca_attrs[0] = pca.explained_variance_
     pca_attrs[1] = pca.explained_variance_ratio_
     pca_attrs.columns = ["pca.explained_variance_","pca.explained_variance_ratio_"]
     pca_attrs.to_csv("output/pca_attr.csv",index=None)
-    transformed_data = pd.concat(transformed_data,data_rest)
+    # transformed_data = pd.concat(transformed_data,data_rest)
+    print(transformed_data.shape)
     return transformed_data
 
-def feature_representation_LLE(data,component = 168):
+def feature_representation_LLE(data,target=None,component = 168):
     from sklearn.manifold import LocallyLinearEmbedding
     lle = LocallyLinearEmbedding(n_neighbors = 5, n_components = component,
                                 eigen_solver = 'dense', method = 'standard')
@@ -65,3 +67,17 @@ def feature_representation_LLE(data,component = 168):
     lle_error.columns = ["lle.reconstruction_error"]
     lle_error.to_csv("output/lle_error.csv",index = None)
     return transformed_data
+
+def select_base_importance(data,target):
+    from sklearn.ensemble import ExtraTreesClassifier
+    from sklearn.feature_selection import SelectFromModel
+    clf = ExtraTreesClassifier(random_state=42)
+    clf.fit(data,target)
+    importance = pd.Series(clf.feature_importances_,index=data.columns.values).sort_values(ascending=False)
+    print(importance)
+    importance = pd.DataFrame(importance)
+    importance.to_csv("output/feature_importance.csv",index=None)
+    model = SelectFromModel(clf,prefit=True)
+    X_new = model.transform(data)
+    print(X_new.shape)
+    return X_new
