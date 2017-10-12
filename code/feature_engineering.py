@@ -9,16 +9,21 @@ def remove_outlier(data):
 def feature_engineering(datasets):
     #generate some features here, need discuss
 
+    #read the file
     train = pd.read_csv(datasets["train"])
-
     train_X = train.iloc[:,:-1]
     train_y = train.TARGET
+
+    # add outlier feature
     test= pd.read_csv(datasets["test"])
-    # n = train_X.shape[0]
-    # clf = IsolationForest(random_state=42)
-    # clf.fit(train_X)
-    # outlier = clf.predict(train_X)
-    # train_X = pd.DataFrame(train_X)
-    # train_X["outlier"] = outlier
+    n = train_X.shape[0]
+    clf = IsolationForest(random_state=42)
+    clf.fit(train_X)
+    outlier = clf.predict(train_X)
+    train_X = pd.DataFrame(train_X)
+    train_X["outlier"] = outlier
+
+    #add xxx
+
     return train_X,train_y,test
 
